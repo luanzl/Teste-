@@ -1,0 +1,356 @@
+/* Parte 8 de 9 do antigo styles.css (dividido na Etapa de modularização).
+   Linhas originais: 2476-2825. Nenhuma regra foi alterada, movida ou reordenada
+   nesta divisão — a ordem entre os arquivos abaixo é a mesma ordem em que
+   apareciam no arquivo único, e o index.html os carrega nessa mesma ordem,
+   o que preserva exatamente a cascata (especificidade + ordem) original. */
+
+.page{padding-bottom: 90px;}
+
+
+/* ===== Config: botões no estilo do menu lateral ===== */
+.cfg-menu-btn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color:#e5e7eb;
+  padding: 14px 16px;
+  border-radius: 14px;
+}
+.cfg-menu-btn .cfg-left{display:flex;align-items:center;gap:12px}
+.cfg-menu-btn .cfg-left i{width:22px;text-align:center;font-size:1.15rem}
+.cfg-menu-btn i.fa-chevron-right{opacity:.75}
+.cfg-menu-btn:active{
+  background: var(--primary);
+  border-color: transparent;
+  color:#fff;
+}
+
+
+/* === Botões estilo menu (padronização) === */
+button.menu-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  color:inherit;
+  box-shadow:0 10px 24px rgba(0,0,0,.22);
+}
+button.menu-item .cfg-left{display:flex;align-items:center;gap:10px}
+button.menu-item .cfg-left i{font-size:18px;opacity:.92}
+button.menu-item .fa-chevron-right{opacity:.65}
+button.menu-item:active{transform:scale(.99);filter:brightness(1.05)}
+
+button.menu-item.compact{
+  width:auto;
+  padding:10px 12px;
+  border-radius:12px;
+  box-shadow:0 8px 18px rgba(0,0,0,.20);
+}
+button.menu-item.compact .cfg-left i{font-size:16px}
+.row button.menu-item.compact{flex:0 0 auto;}
+
+/* === Seletor com aparência de botão (Agenda) === */
+.hidden-select{display:none !important;}
+.picker-btn{width:100%;}
+.picker-btn .cfg-left{min-width:0;flex:1;}
+.picker-btn .cfg-left span{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.picker-btn i.fa-chevron-down{opacity:.65;}
+
+
+/* Botão "Novo Agendamento" no mesmo padrão dos pickers */
+.ag-open-btn{
+  width: 100%;
+}
+
+/* Header da modal de agendamento mais visível em telas pequenas */
+.ag-modal .auth-modal-header h2{
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Botões do header (voltar/fechar) com o mesmo estilo moderno */
+.ag-modal .auth-modal-x{
+  border: none;
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.ag-modal .auth-modal-x:active{ opacity: .85; }
+
+/* Inputs de data/hora menores e lado a lado no mobile (como referência) */
+@media (max-width: 430px){
+  .ag-modal .dt-row{ flex-direction: row !important; flex-wrap: nowrap; }
+  .ag-modal .dt-pill{ height: 40px; padding: 0 10px; border-radius: 14px; gap: 8px; }
+  .ag-modal .dt-pill i{ font-size: 13px; }
+  .ag-modal .dt-pill .dt-input{ font-size: 14px; }
+  .ag-modal .dt-pill.flex{ flex: 1 1 auto; min-width: 0; }
+  .ag-modal .dt-pill.time{ flex: 0 0 118px; min-width: 118px; max-width: 118px; }
+}
+
+/* ======= ANAMNESE (Modelos / Termos / Assinatura) ======= */
+.an-editor{
+  margin: 12px 0 10px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  background: rgba(255,255,255,.03);
+}
+.an-editor .row{gap:10px;flex-wrap:wrap;align-items:center}
+.an-editor .an-qitem{
+  display:grid;
+  grid-template-columns: 1fr 140px;
+  gap:10px;
+  align-items:start;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+  background: rgba(0,0,0,.18);
+  margin-top: 10px;
+}
+.an-editor .an-qitem .an-qmeta{display:flex;gap:8px;flex-direction:column}
+.an-editor .an-qitem .an-qact{display:flex;gap:8px;justify-content:flex-end}
+.an-editor .an-qitem .an-qact .btn{white-space:nowrap}
+.an-editor .an-opt{margin-top:8px}
+
+.an-sign{margin-top: 12px}
+.sig-canvas{
+  width: 100%;
+  height: 180px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  background: rgba(0,0,0,.22);
+  touch-action: none;
+}
+
+/* ===== V5 — Dashboard e experiência ===== */
+.v5-dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.v5-ag-filter{width:auto;min-width:165px;max-width:220px;padding:7px 10px;font-size:12px}
+.v5-dash-line{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.v5-dash-main{min-width:0}
+.v5-dash-main strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v5-dash-meta{font-size:11px;margin-top:3px}
+.v5-dash-value{font-weight:700;white-space:nowrap}
+@media(max-width:760px){.v5-dashboard-grid{grid-template-columns:1fr}.v5-ag-filter{width:100%;max-width:none;flex:1 1 160px}}
+
+/* V5.1 - melhoria isolada 01: filtro rápido ativo da Agenda */
+.ag-filtros-rapidos [data-ag-filter].ag-filter-active {
+  border-color: var(--primary, #7c5cff);
+  box-shadow: inset 0 0 0 1px var(--primary, #7c5cff);
+  font-weight: 700;
+}
+
+
+/* V5.1 - Melhoria 04: estado vazio da Agenda */
+.agenda-empty-v51{
+  width:100%;box-sizing:border-box;min-height:170px;margin-top:10px;padding:28px 18px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  text-align:center;border:1px dashed var(--border,#d8d8d8);border-radius:14px;opacity:.9;
+}
+.agenda-empty-v51 i{font-size:28px;opacity:.65;margin-bottom:2px}
+.agenda-empty-v51 strong{font-size:14px}
+.agenda-empty-v51 span{font-size:12px;opacity:.72;margin-bottom:4px}
+
+
+/* V5.1 - Melhoria 06: selo visual para agendamentos de hoje */
+.ag-hoje-badge-v51{
+  display:inline-flex;align-items:center;vertical-align:middle;margin-left:5px;padding:2px 6px;
+  border:1px solid currentColor;border-radius:999px;font-size:9px;font-weight:800;line-height:1.2;
+  letter-spacing:.04em;opacity:.82;
+}
+
+
+/* V5.1 - Melhoria 07: selo visual para agendamentos de amanhã. */
+.ag-amanha-badge-v51{
+  display:inline-flex;
+  align-items:center;
+  margin-left:6px;
+  padding:2px 7px;
+  border-radius:999px;
+  border:1px solid currentColor;
+  font-size:10px;
+  font-weight:800;
+  line-height:1.2;
+  vertical-align:middle;
+  opacity:.82;
+}
+
+
+/* V5.1 - Melhoria 08 corrigida: selo de agendamento atrasado. */
+.ag-atrasado-badge-v51{
+  display:inline-flex;
+  align-items:center;
+  margin-left:6px;
+  padding:2px 7px;
+  border-radius:999px;
+  border:1px solid currentColor;
+  font-size:10px;
+  font-weight:800;
+  line-height:1.2;
+  vertical-align:middle;
+  opacity:.9;
+}
+
+
+/* V5.1 - Melhorias 14 e 15 */
+.ag-fin-resumo-v51{font-size:11px;margin-top:5px;display:flex;align-items:center;gap:5px;color:var(--muted)}
+.ag-fin-resumo-v51.is-ok{color:#15803d}
+.ag-fin-resumo-v51.is-pendente{color:#b45309}
+.v51-kpi-link{cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.v51-kpi-link:hover{transform:translateY(-2px);border-color:var(--primary)}
+.v51-kpi-link:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+/* ===== V6 DARK PREMIUM — DASHBOARD ESTRUTURAL ===== */
+#tab-dashboard.dp-dashboard{display:none;background:transparent;border:0;box-shadow:none;padding:0;overflow:visible}
+#tab-dashboard.dp-dashboard.active{display:block}
+.dp-dashboard{--dp-border:#29292d;--dp-card:#0b0b0d;--dp-card2:#101013;--dp-red:#ef3340;--dp-green:#24c875;--dp-gold:#f5b82e;--dp-blue:#4c9cff}
+.dp-hero{position:relative;padding:8px 8px 18px;margin-bottom:2px}
+.dp-hero:after{content:"";position:absolute;right:-40px;top:-55px;width:220px;height:180px;background:radial-gradient(circle,rgba(185,28,28,.16),transparent 68%);pointer-events:none}
+.dp-eyebrow{font-size:12px;letter-spacing:.08em;color:#a1a1aa;margin-bottom:6px}
+.dp-hero h1{font-size:34px;line-height:1.05;margin:0;color:#f7f7f8;letter-spacing:-.03em}
+.dp-date{font-size:15px;color:#d1d1d5;margin-top:10px;text-transform:lowercase}
+.dp-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.dp-kpi{position:relative;min-width:0;min-height:156px;padding:18px 16px;border:1px solid var(--dp-border);border-radius:22px;background:linear-gradient(145deg,#101012,#09090b);color:#fff;text-align:left;box-shadow:0 12px 32px rgba(0,0,0,.28);overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;font:inherit;cursor:pointer}
+.dp-kpi:after{content:"";position:absolute;width:120px;height:90px;right:-35px;bottom:-40px;border-radius:50%;opacity:.12;filter:blur(3px)}
+.dp-kpi-clientes:after{background:#ef3340}.dp-kpi-agenda:after{background:#24c875}.dp-kpi-receita:after{background:#f5b82e}.dp-kpi-pendente:after{background:#ef3340}
+.dp-kpi-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:20px;margin-bottom:13px;background:rgba(239,51,64,.18);color:#fff}
+.dp-kpi-agenda .dp-kpi-icon{background:rgba(36,200,117,.2);color:#71efad}.dp-kpi-receita .dp-kpi-icon{background:rgba(245,184,46,.2);color:#ffd46a}.dp-kpi-pendente .dp-kpi-icon{background:rgba(239,51,64,.2);color:#ff7b84}
+.dp-kpi-copy{display:flex;flex-direction:column;min-width:0;width:100%}.dp-kpi-copy small{font-size:13px;color:#e4e4e7;margin-bottom:4px}.dp-kpi-copy strong{font-size:29px;line-height:1.08;color:#fff;white-space:nowrap;letter-spacing:-.025em}.dp-kpi-copy em{font-size:12px;font-style:normal;color:#8d8d96;margin-top:5px}
+.dp-chevron{position:absolute;right:16px;top:22px;font-size:13px;color:#7f7f87}
+.dp-compat,.dp-fiados-hidden{display:none!important}
+.dp-section{margin-top:30px}.dp-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.dp-section-head h2{font-size:14px;letter-spacing:.035em;font-weight:500;color:#d4d4d8;margin:0}.dp-link{border:0;background:none;color:#ef4444;font:inherit;font-size:12px;padding:6px;cursor:pointer}.dp-link i{font-size:10px;margin-left:4px}
+.dp-appointments{display:flex;flex-direction:column;gap:10px}.dp-appointments .item{margin:0!important;padding:0!important;border:1px solid #25252a!important;border-radius:17px!important;background:linear-gradient(90deg,#101012,#0c0c0e)!important;overflow:hidden;box-shadow:none!important}.dp-appointment-row{display:grid;grid-template-columns:72px minmax(0,1fr) auto;align-items:center;min-height:76px;border-left:5px solid #ef3340;padding:12px 14px 12px 0}.dp-ap-time{font-size:20px;font-weight:700;text-align:center;border-right:1px solid #29292e;color:#fff}.dp-ap-main{padding:0 14px;min-width:0}.dp-ap-main strong{display:block;font-size:15px;color:#f4f4f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dp-ap-main span{display:block;font-size:12px;color:#92929b;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dp-ap-status{font-size:10px;font-weight:700;border-radius:999px;padding:7px 10px;white-space:nowrap;background:#14355b;color:#78b9ff}.dp-ap-status.concluido{background:#123f2a;color:#65e5a0}.dp-ap-status.cancelado{background:#4a171b;color:#ff8b92}.dp-ap-status.pendente{background:#493119;color:#ffc46b}
+.dp-appointments>.muted{border:1px dashed #29292e;border-radius:17px;padding:22px;text-align:center}
+.dp-quick-section{padding-bottom:16px}.dp-quick-grid{display:flex;flex-wrap:nowrap;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x;scrollbar-width:none}.dp-quick-grid::-webkit-scrollbar{display:none}.dp-quick{flex:0 0 auto;width:110px;min-width:110px;height:118px;border:1px solid #29292e;border-radius:20px;background:linear-gradient(145deg,#111114,#0b0b0d);color:#e4e4e7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font:inherit;font-size:11px;text-align:center;cursor:pointer}.dp-quick i{font-size:23px;color:#f1f1f2}.dp-quick-primary{background:linear-gradient(145deg,#591319,#170b0d);border-color:#6f1d24}.dp-quick-primary i{color:#ff7a83}.dp-quick:active{transform:scale(.98)}.dp-quick-add{background:transparent;border:1px dashed #3a3a40}.dp-quick-add i{color:#8f8f98}
+.dp-secondary-data{display:none}
+@media(min-width:761px){.dp-dashboard{max-width:980px;margin:0 auto}.dp-kpis{grid-template-columns:repeat(4,1fr)}.dp-kpi{min-height:165px}.dp-quick-grid{max-width:650px}.dp-appointments{max-width:760px}}
+@media(max-width:420px){.dp-hero{padding-left:2px}.dp-hero h1{font-size:31px}.dp-kpis{gap:9px}.dp-kpi{min-height:145px;padding:15px 13px;border-radius:19px}.dp-kpi-icon{width:40px;height:40px;border-radius:12px;font-size:18px;margin-bottom:10px}.dp-kpi-copy strong{font-size:25px}.dp-kpi-copy small{font-size:12px}.dp-kpi-copy em{font-size:11px}.dp-chevron{right:12px;top:18px}.dp-quick-grid{gap:7px}.dp-quick{height:104px;border-radius:17px;font-size:10px}.dp-appointment-row{grid-template-columns:62px minmax(0,1fr) auto;padding-right:10px}.dp-ap-time{font-size:18px}.dp-ap-main{padding:0 10px}.dp-ap-status{padding:6px 8px;font-size:9px}}
+
+/* ===== V6 DARK PREMIUM — ETAPA 03: AGENDA + NOVO AGENDAMENTO ===== */
+#tab-agenda{--ag-bg:#09090b;--ag-card:#101013;--ag-border:#29292e;--ag-red:#ef3340;--ag-muted:#92929b;background:transparent}
+#tab-agenda>.divider{border:0;border-top:1px solid #242429;margin:24px 0 18px}
+#tab-agenda>h2.agenda-view-only{font-size:25px;letter-spacing:-.02em;margin:0 0 14px;color:#f7f7f8}
+#tab-agenda .calendar-card{background:linear-gradient(145deg,#101012,#0a0a0c);border:1px solid var(--ag-border);border-radius:22px;padding:18px;box-shadow:0 14px 36px rgba(0,0,0,.26);margin-bottom:14px}
+#tab-agenda .calendar-header{margin-bottom:15px}
+#tab-agenda .calendar-title{font-size:18px;font-weight:750;color:#f4f4f5;letter-spacing:-.015em}
+#tab-agenda .calendar-nav-btn{width:38px;height:38px;border-radius:12px;border:1px solid #29292e;background:#151518;color:#e4e4e7}
+#tab-agenda .calendar-weekdays span{font-size:10px;color:#777780;font-weight:700;text-transform:uppercase}
+#tab-agenda .calendar-day{border-radius:13px;color:#d4d4d8;min-height:42px;transition:.15s ease}
+#tab-agenda .calendar-day.today{border:1px solid #ef3340;background:rgba(239,51,64,.07)}
+#tab-agenda .calendar-day.selected{background:#cf2029!important;color:#fff!important;box-shadow:0 7px 18px rgba(207,32,41,.25)}
+#tab-agenda .calendar-day.has-event .day-indicator{width:18px;height:3px;border-radius:5px;bottom:4px}
+#agendaResumoDiaCard{background:linear-gradient(145deg,#101012,#0b0b0d);border:1px solid var(--ag-border);border-radius:22px;padding:18px;margin-top:14px;box-shadow:none}
+#agendaResumoDiaCard .agenda-resumo-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}
+#agendaResumoDiaCard h2{font-size:16px;margin:0;color:#f4f4f5}
+#agendaResumoDiaTitulo{font-size:11px;color:#85858e;text-align:right}
+#agendaResumoDiaLista .item,#agendaResumoDiaLista>*{border-radius:15px}
+#btnAbrirNovoAgendamento{background:linear-gradient(135deg,#d91f2a,#b81720)!important;border:1px solid #ef3340!important;color:#fff!important;border-radius:16px!important;min-height:50px;padding:0 17px!important;box-shadow:0 10px 24px rgba(207,32,41,.18)}
+#btnAbrirNovoAgendamento .cfg-left{gap:10px}#btnAbrirNovoAgendamento i{color:#fff!important}
+#tab-agenda>.row.agenda-view-only{background:#0d0d0f;border:1px solid #25252a;border-radius:18px;padding:10px;align-items:stretch!important}
+#buscaAgenda{background:#131316!important;border:1px solid #29292e!important;border-radius:13px!important;min-height:44px;color:#f4f4f5!important}
+#btnExportAgenda,#btnRelatorioAgendaPdf{background:#151518!important;border:1px solid #29292e!important;border-radius:13px!important;min-height:44px;color:#b7b7bf!important}
+.ag-filtros-rapidos{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px!important;margin-top:10px!important}
+.ag-filtros-rapidos [data-ag-filter]{min-height:38px;border-radius:12px!important;border:1px solid #29292e!important;background:#111114!important;color:#aaaab2!important;padding:7px 8px!important}
+.ag-filtros-rapidos [data-ag-filter].ag-filter-active{background:#54151a!important;color:#fff!important;border-color:#c9252f!important;box-shadow:none!important}
+.ag-filtros-rapidos .v5-ag-filter{grid-column:span 2;width:100%!important;max-width:none!important;min-width:0!important;min-height:42px;background:#111114!important;border:1px solid #29292e!important;border-radius:12px!important;color:#e4e4e7!important}
+#btnLimparFiltrosAgenda{grid-column:span 4;justify-content:center;min-height:38px;border-radius:12px!important;color:#9b9ba4!important;border-color:#29292e!important}
+#agendaContagemV51{color:#b5b5bd!important;margin:13px 2px 0!important}#agendaFiltrosAtivosV51{color:#7f7f88!important;margin-left:2px!important}
+#agendaResumo{gap:9px;margin-top:12px}#agendaResumo .kpi{background:#101013!important;border:1px solid #29292e!important;border-radius:15px!important;box-shadow:none!important}
+#listaAgenda{display:flex;flex-direction:column;gap:11px;margin-top:14px}
+#listaAgenda .item.agenda-card{background:linear-gradient(145deg,#101012,#0b0b0d)!important;border:1px solid #29292e!important;border-radius:19px!important;box-shadow:none!important;padding:16px 15px 16px 20px!important;margin:0!important;overflow:hidden}
+#listaAgenda .item.agenda-card::before{width:4px!important;border-radius:4px 0 0 4px}
+#listaAgenda .agenda-card .title,#listaAgenda .agenda-card strong{color:#f4f4f5}
+#listaAgenda .agenda-card .muted{color:#8d8d96}
+#listaAgenda .agenda-card .btn,#listaAgenda .agenda-card button{border-radius:12px}
+#listaAgenda .ag-fin-resumo-v51{border-radius:999px;width:max-content;padding:4px 8px;background:#151518}
+
+/* Modal premium sem alterar IDs/lógica */
+#modalNovoAgendamento .auth-modal-backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
+#modalNovoAgendamento .ag-modal-dialog{background:#0b0b0d!important;border:1px solid #2a2a2f!important;border-radius:24px!important;box-shadow:0 30px 80px rgba(0,0,0,.55);overflow:hidden}
+#modalNovoAgendamento .ag-modal-header{background:#101013;border-bottom:1px solid #242429;padding:18px 20px}
+#modalNovoAgendamento .ag-modal-header h2{font-size:20px;color:#fff;margin:0}
+#modalNovoAgendamento .ag-modal-body{background:#0b0b0d;padding:16px}
+#agFormCard{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+#agFormCard .label{display:block;color:#9d9da6;font-size:11px;font-weight:700;letter-spacing:.035em;margin:14px 0 7px}
+#agFormCard .input,#agFormCard .picker-btn,#agFormCard .dt-pill{background:#131316!important;border:1px solid #2a2a2f!important;border-radius:13px!important;color:#f4f4f5!important;box-shadow:none!important}
+#agFormCard .input{min-height:46px;padding:10px 12px}#agFormCard textarea.input{min-height:86px;resize:vertical}
+#agFormCard .picker-btn{min-height:48px;padding:0 13px!important}#agFormCard .picker-btn i{color:#9c9ca5}
+#agFormCard .dt-pill{min-height:48px;padding:0 10px}#agFormCard .dt-pill .input{border:0!important;background:transparent!important;min-height:42px;padding:4px!important}
+#agFormCard .check{color:#c7c7ce;background:#101013;border:1px solid #25252a;border-radius:12px;padding:10px 12px}
+#agFormCard #agResponsavel,#agFormCard #agStatus{appearance:auto}
+#agFormCard .ag-modal-footer-actions{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(11,11,13,0),#0b0b0d 25%);padding-top:20px;padding-bottom:calc(16px + env(safe-area-inset-bottom, 0px));margin-top:6px;display:flex;gap:10px;align-items:center}
+#agModalVoltar{position:static!important;flex:0 0 46px;width:46px;height:46px;border-radius:14px!important;background:#17171a!important;border:1px solid #2b2b30!important;color:#fff!important}
+#btnAgendar{flex:1;min-height:48px;border-radius:14px!important;background:linear-gradient(135deg,#ef3340,#c51f29)!important;border:0!important;color:#fff!important;font-weight:800;box-shadow:0 10px 24px rgba(239,51,64,.18)}
+
+@media(max-width:760px){
+ #tab-agenda{padding-bottom:22px}
+ #tab-agenda .calendar-card{border-radius:20px;padding:14px 12px}
+ #tab-agenda .calendar-day{min-height:39px;font-size:12px}
+ #agendaResumoDiaCard{padding:15px;border-radius:19px}
+ #tab-agenda>.row.agenda-view-only{display:grid!important;grid-template-columns:1fr;padding:8px!important}
+ #tab-agenda>.row.agenda-view-only>div{display:grid!important;grid-template-columns:1fr 1fr;gap:7px!important}
+ #buscaAgenda{width:100%!important}
+ #btnExportAgenda,#btnRelatorioAgendaPdf{font-size:11px;padding:0 9px!important}
+ .ag-filtros-rapidos{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+ .ag-filtros-rapidos [data-ag-filter]{font-size:10px!important;padding:6px 3px!important}
+ #listaAgenda .item.agenda-card{padding:14px 12px 14px 17px!important}
+ #modalNovoAgendamento .ag-modal-dialog{width:calc(100% - 18px)!important;max-width:none!important;max-height:calc(100dvh - 34px)!important;border-radius:22px!important}
+ #modalNovoAgendamento .ag-modal-body{padding:12px!important;overflow:auto}
+ #agFormCard .row.dt-row{display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:7px!important}
+}
+@media(max-width:390px){
+ /* Os 4 filtros rápidos (Hoje/Amanhã/Esta semana/Todos) continuam
+    sempre lado a lado numa única linha, mesmo em telas estreitas —
+    por isso a grade de 4 colunas NÃO é mais reduzida para 2 aqui. */
+}
+
+/* ===================================================================
+   V6 DARK PREMIUM — ETAPA 04
+   Escopo: Clientes, Serviços, Financeiro, Visão do Dono, Notificações,
+   Configurações e Meu usuário (Perfil). Somente aparência — nenhum ID,
+   data-*, lógica JS, Firebase/Firestore foi alterado por este bloco.
+   =================================================================== */
+
+/* --- grid3: definição que faltava (Financeiro e Visão do Dono já usavam
+   essa classe no HTML, mas ela nunca tinha sido definida no CSS) --- */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:480px){.grid3{gap:7px}}
+
+/* --- Cabeçalho de seção padrão, reaproveitado nas telas restantes --- */
+.dp-screen-head{margin:4px 0 14px}
+.dp-screen-head h2{margin:0 0 2px;font-size:19px;font-weight:800;color:#fafafa;letter-spacing:-.02em}
+.dp-screen-sub{margin:0;color:#8f8f98;font-size:12.5px}
+.dp-section-label{margin:22px 0 10px;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#8f8f98}
+.dp-section-label:first-child{margin-top:4px}
+
+/* --- Campos de busca no padrão da Agenda (pílula escura) --- */
+#tab-clientes #buscaCliente,
+#tab-servicos #buscaServico,
+#tab-financeiro #buscaTx,
+#tab-financeiro #buscaFiado{
+  background:#131316!important;border:1px solid #29292e!important;border-radius:13px!important;
+  min-height:44px;color:#f4f4f5!important;
+}
+
+/* --- KPIs premium (Financeiro / Visão do Dono) — reaproveita .kpi/.grid3 --- */
+#tab-financeiro .kpi,#tab-visao-dono .kpi{
+  border-radius:19px!important;padding:14px!important;
+  background:linear-gradient(145deg,#111114,#0b0b0d)!important;
+  border:1px solid #29292e!important;box-shadow:none!important;border-left:0!important;
+  min-height:92px;display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+#tab-financeiro .kpi small,#tab-visao-dono .kpi-label{color:#8f8f98!important;font-size:11px;font-weight:600}
+#tab-financeiro .kpi strong,#tab-visao-dono .kpi-value{color:#fff!important;font-size:17px!important;font-weight:800;margin-top:5px!important;letter-spacing:-.02em;display:block}

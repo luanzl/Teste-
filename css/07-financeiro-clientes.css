@@ -1,0 +1,321 @@
+/* Parte 7 de 9 do antigo styles.css (dividido na Etapa de modularização).
+   Linhas originais: 2126-2475. Nenhuma regra foi alterada, movida ou reordenada
+   nesta divisão — a ordem entre os arquivos abaixo é a mesma ordem em que
+   apareciam no arquivo único, e o index.html os carrega nessa mesma ordem,
+   o que preserva exatamente a cascata (especificidade + ordem) original. */
+
+
+.calendar-week-strip-day .cwd-top {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.calendar-week-strip-day .cwd-number {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.calendar-week-strip-day .cwd-indicator {
+  width: 60%;
+  height: 3px;
+  border-radius: 999px;
+  opacity: 0;
+}
+
+/* estados da semana */
+.calendar-week-strip-day.today {
+  border-color: var(--primary);
+}
+
+.calendar-week-strip-day.selected {
+  background: var(--primary);
+  color: #fff;
+}
+
+.calendar-week-strip-day.has-event .cwd-indicator {
+  opacity: 1;
+  background: var(--primary);
+}
+
+.calendar-week-strip-day.status-concluido .cwd-indicator {
+  background: #22c55e;
+}
+.calendar-week-strip-day.status-cancelado .cwd-indicator {
+  background: var(--cor-ca);
+}
+
+/* Ajuste do grid para funcionar como modo expandido */
+.calendar-expanded .calendar-grid {
+  margin-top: 4px;
+}
+
+/* Agendamentos do dia (carrossel) */
+#agendaResumoDiaCard {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid #222;
+  padding: 14px 14px 10px;
+  margin-bottom: 16px;
+}
+
+.agenda-resumo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.agenda-resumo-header h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.agenda-resumo-data {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.agenda-resumo-scroll {
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+ 
+  scroll-behavior: smooth;
+ 
+  -ms-overflow-style: none;  /* IE/Edge */
+ 
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* esconde a barrinha de rolagem horizontal do carrossel */
+.agenda-resumo-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.agenda-resumo-card {
+ 
+  flex: 0 0 220px;
+  background: #020617;
+  border-radius: 12px;
+  border: 1px solid #1f2937;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  }
+
+.agenda-resumo-card.status-agendado {
+  border-color: #3b82f6;
+}
+.agenda-resumo-card.status-concluido {
+  border-color: #22c55e;
+}
+.agenda-resumo-card.status-cancelado {
+  border-color: var(--cor-ca);
+}
+
+.agenda-resumo-cliente {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.agenda-resumo-dia-linha {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.agenda-resumo-hora {
+  font-size: 0.8rem;
+}
+
+.agenda-resumo-detalhe-horas {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.agenda-resumo-descricao {
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+
+.agenda-resumo-empty {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* barra de rolagem suave pro carrossel */
+.agenda-resumo-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.agenda-resumo-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.agenda-resumo-scroll::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 999px;
+}
+
+.agenda-resumo-empty-wrapper {
+  flex: 0 0 120%;
+  min-width: 120%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.calendar-day-item {
+  
+}
+
+
+/* global fixed header behavior - keep header visible on all screen sizes */
+
+
+/* Botão "Cadastrar Serviço" na aba de Serviços */
+.btn.servico-cadastrar {
+  background: #dc3545;
+  color: #ffffff;
+}
+
+.btn.servico-cadastrar:hover {
+  opacity: 0.9;
+}
+
+/* Toast (feedback rápido) */
+#appToast{
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.88);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+#appToast.show{
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* Indica que já foi lançado */
+.ag-btn.is-launched{
+  opacity: 0.85;
+}
+
+
+/* ===== Config section buttons (open modals) ===== */
+.cfg-section-btn{
+  width:100%;
+  text-align:left;
+  border:1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  margin: 10px 0 6px;
+}
+.cfg-section-btn:active{ transform: translateY(1px); }
+
+/* Make config modals a bit wider on desktop */
+.cfg-modal .auth-modal-dialog{
+  width: min(780px, calc(100vw - 26px));
+  max-height: min(86vh, 900px);
+  overflow: auto;
+}
+.cfg-modal .auth-modal-body{
+  padding-top: 8px;
+}
+
+
+
+
+/* ===== Config buttons modern style ===== */
+#tab-config{padding-bottom:24px;}
+
+.cfg-section-btn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:16px 16px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  transition: transform .08s ease, background .12s ease, border-color .12s ease;
+}
+.cfg-section-btn::after{
+  content:"›";
+  font-size:1.6rem;
+  line-height:1;
+  opacity:.55;
+  transform: translateY(-1px);
+}
+.cfg-section-btn:active{
+  transform: scale(.98);
+}
+.cfg-section-btn:hover{
+  border-color: rgba(255,255,255,.18);
+  background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+}
+
+
+
+/* Configurações - botões modernos */
+.cfg-nav-item{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:16px 16px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing:.2px;
+  box-shadow: var(--shadow);
+  margin: 10px 0 8px;
+}
+.cfg-nav-item:active{
+  transform: translateY(1px) scale(.99);
+  filter: brightness(1.08);
+}
+.cfg-nav-text{display:block}
+.cfg-nav-chevron{
+  font-size: 1.4rem;
+  opacity:.75;
+  line-height:1;
+}
+
+
+/* espaço para não cobrir conteúdo */
+
+/* Cor de destaque livre (Configurações > Tema) */
+.cfg-acento-row{display:flex;align-items:center;gap:12px}
+.cfg-color-input{
+  -webkit-appearance:none;appearance:none;
+  width:64px;height:48px;padding:3px;flex:0 0 auto;
+  border-radius:14px;border:1px solid var(--line,rgba(255,255,255,.14));
+  background:var(--field,#111114);cursor:pointer;
+}
+.cfg-color-input::-webkit-color-swatch-wrapper{padding:0}
+.cfg-color-input::-webkit-color-swatch{border:0;border-radius:10px}
+.cfg-color-input::-moz-color-swatch{border:0;border-radius:10px}

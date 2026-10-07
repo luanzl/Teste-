@@ -1,0 +1,102 @@
+/* Onboarding interativo (tutorial da primeira abertura).
+   Overlay com destaque (spotlight) no elemento da vez + balão explicativo.
+   Cores seguem o tema do app (escuro/claro) e a cor de destaque escolhida. */
+
+#onbRoot{
+  --onb-bg:#131317; --onb-txt:#f4f4f5; --onb-muted:#a1a1aa; --onb-line:#2b2b31;
+  --onb-ac:var(--primary-light,#ef4444); --onb-ac2:var(--primary,#b91c1c);
+  position:fixed; inset:0; z-index:99990;
+  font-family:inherit; line-height:1.4;
+}
+:root[data-theme="light"] #onbRoot{
+  --onb-bg:#ffffff; --onb-txt:#0f172a; --onb-muted:#6b7280; --onb-line:#e4e4e7;
+}
+
+/* Camada que bloqueia toques no app enquanto o tutorial está aberto */
+#onbRoot .onb-blocker{
+  position:absolute; inset:0; touch-action:none; overscroll-behavior:contain;
+  background:transparent;
+}
+/* Passos sem elemento (boas-vindas / final): fundo escurecido simples */
+#onbRoot.onb-centered .onb-blocker{ background:rgba(0,0,0,.72); }
+
+/* Destaque: o "buraco" é feito com uma sombra gigante ao redor da caixa */
+#onbRoot .onb-spot{
+  position:fixed; left:0; top:0; width:0; height:0; border-radius:14px;
+  box-shadow:0 0 0 9999px rgba(0,0,0,.72);
+  pointer-events:none;
+  transition:left .28s ease, top .28s ease, width .28s ease, height .28s ease, opacity .2s ease;
+}
+#onbRoot .onb-spot::after{
+  content:""; position:absolute; inset:-3px; border-radius:inherit;
+  border:2px solid var(--onb-ac);
+  animation:onbPulso 1.8s ease-in-out infinite;
+}
+#onbRoot.onb-centered .onb-spot{ opacity:0; box-shadow:none; }
+
+/* Balão */
+#onbRoot .onb-tip{
+  position:fixed; left:0; top:0; box-sizing:border-box;
+  width:min(330px, calc(100% - 24px));
+  padding:16px 16px 14px; border-radius:18px;
+  background:var(--onb-bg); color:var(--onb-txt);
+  border:1px solid var(--onb-line);
+  box-shadow:0 18px 48px rgba(0,0,0,.5);
+  animation:onbEntra .22s ease both;
+}
+#onbRoot .onb-arrow{
+  position:absolute; width:14px; height:14px; transform:rotate(45deg);
+  background:var(--onb-bg); border:1px solid var(--onb-line);
+}
+#onbRoot .onb-arrow.top{ top:-8px; border-right:0; border-bottom:0; }
+#onbRoot .onb-arrow.bottom{ bottom:-8px; border-left:0; border-top:0; }
+#onbRoot.onb-centered .onb-arrow{ display:none; }
+
+#onbRoot .onb-eyebrow{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  margin:0 0 8px; font-size:.72rem; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--onb-muted);
+}
+#onbRoot .onb-bar{ height:3px; border-radius:3px; background:var(--onb-line); overflow:hidden; margin:0 0 12px; }
+#onbRoot .onb-bar > i{
+  display:block; height:100%; width:0; border-radius:3px;
+  background:linear-gradient(90deg,var(--onb-ac),var(--onb-ac2));
+  transition:width .28s ease;
+}
+#onbRoot .onb-ico{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:11px; margin:0 0 10px; font-size:1rem; color:#fff;
+  background:linear-gradient(135deg,var(--onb-ac),var(--onb-ac2));
+}
+#onbRoot .onb-title{ margin:0 0 6px; font-size:1.08rem; font-weight:800; color:var(--onb-txt); }
+#onbRoot .onb-text{ margin:0 0 14px; font-size:.9rem; color:var(--onb-muted); }
+#onbRoot .onb-text b{ color:var(--onb-txt); }
+
+#onbRoot .onb-actions{ display:flex; align-items:center; gap:8px; }
+#onbRoot .onb-spacer{ flex:1 1 auto; }
+#onbRoot .onb-btn{
+  appearance:none; -webkit-appearance:none; cursor:pointer; margin:0;
+  min-height:40px; padding:0 14px; border-radius:12px;
+  font:inherit; font-size:.9rem; font-weight:700; line-height:1;
+  border:1px solid var(--onb-line); background:transparent; color:var(--onb-txt);
+  width:auto;
+}
+#onbRoot .onb-btn.onb-primary{
+  border-color:transparent; color:#fff;
+  background:linear-gradient(135deg,var(--onb-ac),var(--onb-ac2));
+  box-shadow:0 6px 16px var(--primary-shadow, rgba(185,28,28,.3));
+}
+#onbRoot .onb-btn.onb-skip{
+  border:0; padding:0 6px; min-height:40px; font-weight:600; font-size:.82rem;
+  color:var(--onb-muted); text-decoration:underline; text-underline-offset:3px;
+}
+#onbRoot .onb-btn[hidden]{ display:none; }
+#onbRoot .onb-btn:focus-visible{ outline:2px solid var(--onb-ac); outline-offset:2px; }
+
+@keyframes onbPulso{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.45; transform:scale(1.03); } }
+@keyframes onbEntra{ from{ opacity:0; transform:translateY(6px) scale(.98); } to{ opacity:1; transform:none; } }
+
+@media (prefers-reduced-motion: reduce){
+  #onbRoot .onb-spot, #onbRoot .onb-bar > i{ transition:none; }
+  #onbRoot .onb-spot::after, #onbRoot .onb-tip{ animation:none; }
+}
