@@ -1,0 +1,228 @@
+/* ==========================================================================
+   11 — Tema claro "clean" + cor de destaque configurável
+
+   Carregado por ÚLTIMO. Faz duas coisas:
+   1) COR DE DESTAQUE: o app inteiro passa a usar variáveis (--primary,
+      --primary-light, --acc-ink, --acc-soft) no lugar de vermelho fixo.
+      Configurações > Tema > "Cor de destaque" grava state.cfg.acento e o
+      applyTheme() põe data-accent="blue|green|purple|red" no <html>.
+      Sem escolha ("Padrão do tema"): Dark = vermelho, Light = azul, Verde = verde.
+   2) TEMA CLARO: os cards/inputs/textos que estavam com cor escura fixa
+      (gradientes #111114, textos #f4f4f5...) ganham versões claras.
+   Nada aqui muda o tema escuro além de trocar o vermelho fixo pela variável.
+   ========================================================================== */
+
+/* ---------- Variáveis novas ---------- */
+:root{
+  --text: var(--txt); /* várias regras antigas usavam var(--text), que nunca existiu */
+  --acc-ink: color-mix(in srgb, var(--primary-light) 70%, #fff);       /* ícone/texto de destaque sobre fundo escuro */
+  --acc-soft: color-mix(in srgb, var(--primary-light) 16%, transparent); /* fundo suave de ícones */
+  --tb-item-active: var(--acc-ink);
+}
+
+/* ---------- Cores de destaque ---------- */
+:root[data-accent="red"]{
+  --primary:#b91c1c; --primary-light:#ef4444;
+}
+:root[data-accent="blue"],
+:root[data-theme="light"]:not([data-accent]){
+  --primary:#2563eb; --primary-light:#3b82f6;
+}
+:root[data-accent="green"]{
+  --primary:#15803d; --primary-light:#22c55e;
+}
+:root[data-accent="purple"]{
+  --primary:#7c3aed; --primary-light:#8b5cf6;
+}
+:root[data-accent],
+:root[data-theme="light"]:not([data-accent]){
+  --primary-glow: color-mix(in srgb, var(--primary) 25%, transparent);
+  --primary-shadow: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+:root[data-accent]:not([data-theme="light"]){
+  --accent-top: color-mix(in srgb, var(--primary) 18%, #000);
+  --accent-bg: color-mix(in srgb, var(--primary) 22%, #000);
+}
+
+/* ---------- Tokens do tema claro ---------- */
+:root[data-theme="light"]{
+  --bg:#f3f6fa; --bg2:#ffffff; --card:#ffffff;
+  --muted:#64748b; --txt:#0f172a;
+  --line:#e2e8f0; --surf2:#f8fafc; --field:#f1f5f9;
+  --shadow: 0 1px 2px rgba(15,23,42,.05), 0 8px 22px rgba(15,23,42,.07);
+  --acc-ink: var(--primary);
+  --acc-soft: color-mix(in srgb, var(--primary) 10%, transparent);
+  --accent-top:#ffffff;
+  --accent-bg: color-mix(in srgb, var(--primary) 9%, #fff);
+  --tb-item-active: var(--primary);
+  --tb-fab-ring:#f3f6fa;
+}
+:root[data-theme="light"] body, html[data-theme="light"]{ background:var(--bg); }
+
+/* ==========================================================================
+   COR DE DESTAQUE — troca do vermelho fixo (vale para todos os temas)
+   ========================================================================== */
+.app-header .subtitle{ color:rgba(255,255,255,.82); }
+:root[data-theme="light"] .app-header{
+  /* cor sólida (igual ao Dark): o iOS só consegue pintar a barra de status do celular
+     com a mesma cor do cabeçalho quando ele não é gradiente */
+  background:var(--primary)!important;
+}
+:root[data-theme="light"] .btn-menu{ background:rgba(255,255,255,.2)!important; color:#fff!important; border-color:transparent!important; }
+
+#dpTabFab{
+  background:radial-gradient(circle at 30% 25%,var(--primary-light),var(--primary) 60%,color-mix(in srgb,var(--primary) 70%,#000));
+  box-shadow:0 0 0 5px var(--tb-fab-ring),0 8px 22px color-mix(in srgb,var(--primary) 55%,transparent);
+}
+.dp-hero:after{ background:radial-gradient(circle,color-mix(in srgb,var(--primary) 18%,transparent),transparent 68%); }
+.dp-kpi-clientes:after{ background:var(--primary-light); }
+.dp-kpi-icon{ background:var(--acc-soft); color:var(--acc-ink); }
+.dp-link{ color:var(--acc-ink); }
+.dp-appointment-row{ border-left-color:var(--primary-light); }
+.dp-quick-primary{
+  background:linear-gradient(145deg,color-mix(in srgb,var(--primary) 60%,#000),#0b0b0d);
+  border-color:color-mix(in srgb,var(--primary) 70%,#000);
+}
+.dp-quick-primary i{ color:var(--acc-ink); }
+.dp-service-icon,.dp-vc-field i,.cfg-menu-btn .cfg-left i,button.menu-item .cfg-left i,.notif-icon{
+  background:var(--acc-soft); color:var(--acc-ink);
+}
+#tab-meu-usuario .perfil-avatar{
+  border-color:color-mix(in srgb,var(--primary) 40%,transparent);
+  box-shadow:0 0 0 6px color-mix(in srgb,var(--primary) 10%,transparent);
+}
+#btnAbrirNovoAgendamento,#btnAgendar{
+  background:linear-gradient(135deg,var(--primary-light),var(--primary))!important;
+  border:1px solid var(--primary-light)!important;
+  box-shadow:0 10px 24px color-mix(in srgb,var(--primary) 25%,transparent)!important;
+}
+.btn.servico-cadastrar{ background:var(--primary); }
+#tab-agenda .calendar-day.today{ border-color:var(--primary-light); background:var(--acc-soft); }
+#tab-agenda .calendar-day.selected{
+  background:var(--primary)!important;
+  box-shadow:0 7px 18px color-mix(in srgb,var(--primary) 30%,transparent);
+}
+.ag-filtros-rapidos [data-ag-filter].ag-filter-active{
+  background:color-mix(in srgb,var(--primary) 32%,#0b0b0d)!important;
+  border-color:var(--primary-light)!important;
+}
+
+/* ==========================================================================
+   TEMA CLARO — superfícies
+   ========================================================================== */
+/* borda padrão (antes #222 fixo) — :where() mantém a especificidade baixa */
+:root[data-theme="light"] :where(.card,.kpi,.item,.tab,.calendar-card,.input,select.input,.dt-pill,.fab,.kpi-row .kpi,#agendaResumoDiaCard,.userbox){ border-color:var(--line); }
+:root[data-theme="light"] :where(.divider,#tab-agenda>.divider){ border-top-color:var(--line); }
+:root[data-theme="light"] .input:focus{ border-color:var(--primary); }
+:root[data-theme="light"] .btn.ghost{ border-color:#cbd5e1; }
+:root[data-theme="light"] :where(.list .item){ background:var(--surf2)!important; border-color:var(--line)!important; }
+
+/* cards */
+:root[data-theme="light"] :is(
+  .dp-kpi,.dp-appointments .item,.dp-quick,#tab-agenda .calendar-card,#agendaResumoDiaCard,
+  #listaAgenda .item.agenda-card,#tab-financeiro .kpi,#tab-visao-dono .kpi,#agendaResumo .kpi,
+  .notif-item,.cfg-menu-btn,button.menu-item.compact,.cfg-section-btn,.cfg-nav-item,
+  #tab-meu-usuario .perfil-usuario-header,#tab-meu-usuario .perfil-usuario-body,
+  #tab-agenda>.row.agenda-view-only
+){
+  background:#fff!important; border-color:var(--line)!important; box-shadow:var(--shadow)!important;
+}
+:root[data-theme="light"] :is(.agenda-resumo-card,.calendar-week-strip-day:not(.selected)){ background:#fff; }
+:root[data-theme="light"] .dp-quick.dp-quick-add{ background:transparent!important; border:1px dashed #cbd5e1!important; box-shadow:none!important; }
+:root[data-theme="light"] .dp-quick.dp-quick-primary{
+  background:linear-gradient(145deg,var(--primary-light),var(--primary))!important;
+  border-color:var(--primary)!important; color:#fff!important;
+}
+:root[data-theme="light"] .dp-quick.dp-quick-primary i{ color:#fff!important; }
+:root[data-theme="light"] .dp-quick i{ color:var(--acc-ink); }
+:root[data-theme="light"] .dp-quick.dp-quick-add i{ color:#94a3b8; }
+
+/* campos e botões secundários */
+:root[data-theme="light"] :is(
+  #buscaAgenda,#tab-clientes #buscaCliente,#tab-servicos #buscaServico,#tab-financeiro #buscaTx,#tab-financeiro #buscaFiado,
+  #agFormCard .input,#agFormCard .picker-btn,#agFormCard .dt-pill,.auth-modal-body .input,
+  #tab-meu-usuario .perfil-usuario-body .input,#tab-meu-usuario .perfil-usuario-body select.input,
+  .ag-filtros-rapidos [data-ag-filter],.ag-filtros-rapidos .v5-ag-filter,
+  #btnExportAgenda,#btnRelatorioAgendaPdf,#tab-agenda .calendar-nav-btn,#agModalVoltar,#btnLimparFiltrosAgenda,
+  .dp-item-actions .btn,.notif-actions .btn,#tab-financeiro .kpi .fab
+){
+  background:var(--field)!important; border-color:var(--line)!important; color:var(--txt)!important;
+}
+:root[data-theme="light"] .ag-filtros-rapidos [data-ag-filter].ag-filter-active{
+  background:var(--primary)!important; border-color:var(--primary)!important; color:#fff!important;
+}
+:root[data-theme="light"] ::placeholder{ color:#94a3b8; }
+:root[data-theme="light"] #agFormCard .check{ background:var(--surf2); border-color:var(--line); color:#334155; }
+:root[data-theme="light"] #agFormCard .picker-btn i{ color:#64748b; }
+:root[data-theme="light"] .dp-item-actions .btn.danger{ background:rgba(185,28,28,.08)!important; border-color:rgba(185,28,28,.2)!important; color:#b91c1c!important; }
+:root[data-theme="light"] #listaAgenda .ag-fin-resumo-v51{ background:var(--field); }
+:root[data-theme="light"] .an-editor .an-qitem{ background:rgba(15,23,42,.04); }
+:root[data-theme="light"] .sig-canvas{ background:#f8fafc; }
+
+/* modais */
+:root[data-theme="light"] .auth-modal-backdrop,
+:root[data-theme="light"] #modalNovoAgendamento .auth-modal-backdrop{ background:rgba(15,23,42,.45)!important; }
+:root[data-theme="light"] :is(.auth-modal-dialog,#modalNovoAgendamento .ag-modal-dialog,#tab-config .cfg-modal .auth-modal-dialog){
+  background:#fff!important; border-color:var(--line)!important; box-shadow:0 24px 60px rgba(15,23,42,.22)!important;
+}
+:root[data-theme="light"] :is(#modalNovoAgendamento .ag-modal-header,#modalNovoAgendamento .ag-modal-body,.ag-modal-header,.cfg-modal .auth-modal-header,.cfg-modal .auth-modal-footer){ background:#fff; }
+:root[data-theme="light"] #agFormCard .ag-modal-footer-actions{ background:linear-gradient(180deg,rgba(255,255,255,0),#fff 25%); }
+:root[data-theme="light"] .auth-modal-x,:root[data-theme="light"] .auth-modal-close{ background:var(--field)!important; border-color:var(--line)!important; color:var(--txt)!important; }
+
+/* notificações */
+:root[data-theme="light"] #notificationsScreen{ background:var(--bg)!important; }
+:root[data-theme="light"] #notificationsScreen .notif-screen-header{ background:#fff!important; border-bottom-color:var(--line); }
+
+/* menu lateral */
+:root[data-theme="light"] .sidebar{ box-shadow:2px 0 24px rgba(15,23,42,.15); }
+:root[data-theme="light"] .sidebar-profile{ background:var(--surf2); border-bottom-color:var(--line); }
+:root[data-theme="light"] .sidebar-footer{ border-top-color:var(--line); }
+:root[data-theme="light"] .sidebar-name{ color:var(--txt); }
+:root[data-theme="light"] .sidebar-email{ color:#475569; }
+:root[data-theme="light"] .sidebar-small{ color:#64748b; }
+:root[data-theme="light"] #navMenu .menu-item:not(.active){ background:transparent!important; border-color:transparent!important; box-shadow:none!important; color:#475569; }
+:root[data-theme="light"] #navMenu .menu-item:not(.active):hover,
+:root[data-theme="light"] .menu-item-logout:hover{ background:#eef2f7!important; color:var(--txt); }
+
+/* barras fixas do rodapé (Config) */
+
+/* ==========================================================================
+   TEMA CLARO — textos
+   ========================================================================== */
+:root[data-theme="light"] :is(
+  .dp-hero h1,.dp-section-head h2,.dp-kpi,.dp-kpi-copy strong,.dp-kpi-copy small,.dp-ap-time,.dp-ap-main strong,.dp-quick,
+  #tab-agenda>h2.agenda-view-only,#tab-agenda .calendar-title,#tab-agenda .calendar-day:not(.selected),#agendaResumoDiaCard h2,
+  #listaAgenda .agenda-card .title,#listaAgenda .agenda-card strong,.dp-screen-head h2,#tab-config h2,
+  .list .item strong,.dp-item-main strong,.dp-item-price,.dp-vc-header strong,.dp-vc-field span,
+  #tab-financeiro .kpi strong,#tab-visao-dono .kpi-value,.cfg-menu-btn,#modalNovoAgendamento .ag-modal-header h2
+){ color:var(--txt)!important; }
+:root[data-theme="light"] .dp-quick.dp-quick-primary{ color:#fff!important; }
+:root[data-theme="light"] :is(
+  .dp-eyebrow,.dp-date,.dp-screen-sub,.dp-section-label,.dp-ap-main span,.dp-item-main span,.dp-kpi-copy em,.dp-chevron,
+  #agendaResumoDiaTitulo,#tab-agenda .calendar-weekdays span,.list .item .muted,.dp-vc-field small,#agFormCard .label,
+  .notif-meta,#agendaContagemV51,#agendaFiltrosAtivosV51,#listaAgenda .agenda-card .muted,#tab-financeiro .kpi small,#tab-visao-dono .kpi-label
+){ color:var(--muted)!important; }
+:root[data-theme="light"] #tab-agenda .calendar-day.selected{ color:#fff!important; }
+:root[data-theme="light"] .dp-hero:after{ opacity:.6; }
+
+/* cores semânticas legíveis sobre fundo claro */
+:root[data-theme="light"] .dp-tx-value.in,:root[data-theme="light"] .dp-tx-icon.in{ color:#15803d; }
+:root[data-theme="light"] .dp-tx-value.out,:root[data-theme="light"] .dp-tx-icon.out{ color:#b91c1c; }
+:root[data-theme="light"] .dp-tx-icon.in{ background:rgba(21,128,61,.10); }
+:root[data-theme="light"] .dp-tx-icon.out{ background:rgba(185,28,28,.09); }
+:root[data-theme="light"] .dp-ap-status{ background:#e0ecff; color:#1d4ed8; }
+:root[data-theme="light"] .dp-ap-status.concluido{ background:#dcfce7; color:#15803d; }
+:root[data-theme="light"] .dp-ap-status.cancelado{ background:#fee2e2; color:#b91c1c; }
+:root[data-theme="light"] .dp-ap-status.pendente{ background:#fef3c7; color:#b45309; }
+:root[data-theme="light"] .dp-kpi-agenda .dp-kpi-icon{ color:#15803d; }
+:root[data-theme="light"] .dp-kpi-receita .dp-kpi-icon{ color:#b45309; }
+:root[data-theme="light"] .dp-kpi-pendente .dp-kpi-icon{ color:#b91c1c; }
+:root[data-theme="light"] .badge-success{ background:#dcfce7; color:#166534; }
+:root[data-theme="light"] .badge-muted{ background:#f1f5f9; color:#475569; }
+
+/* divisores internos */
+:root[data-theme="light"] .dp-ap-time,
+:root[data-theme="light"] .dp-tx-actions,
+:root[data-theme="light"] .dp-vc-header,
+:root[data-theme="light"] .dp-vc-field{ border-color:var(--line); }
+:root[data-theme="light"] .dp-appointments>.muted{ border-color:#cbd5e1; }
